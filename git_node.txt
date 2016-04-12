@@ -1,0 +1,44 @@
+note for git
+
+工作区-->缓存区-->版本库-->远程库
+
+安装git
+1、下载安装包并安装，配置用户信息
+git config --global user.name “name”
+git config --global user.email “email@example.com”
+--global 全局配置
+
+使用git创建一个版本库
+1、mkdir file	创建版本库文件
+2、cd file	进入某文件
+3、git init 初始化版本库（目标文件会增加.git文件）
+4、git add file.txt 	将文件file.txt添加到暂存区，可同时添加多个，文件名用空格隔开
+5、git commit -m “descript”		将所有暂存区的文件提交到版本库当前分支，-m “”添加提交说明，方便后面区分提交版本
+
+在本地对文件进行操作
+1、git status	查看当前版本库状态，是否有修改，是否有东西需要提交
+2、git diff file.txt	查看具体文件修改的详细信息
+3、git log --pretty=oneline		查看提交记录，--pretty=oneline命令使记录一行显示，内容包括版本号、提交说明
+4、git reset --hard HEAD^	使版本回退至上一个版本，HEAD指当前版本，往上是依次增加^个数，如果版本回退很多，可使用HEAD~100进行回退到上100个版本
+5、git reflog 查看版本库的所有操作记录，包括提交和版本回退等等，可看到相应的版本号，方便进行一些回复操作
+6、git reset --hard 版本号 		使版本回到相应的版本号，包括回退和恢复
+7、git checkout --file.txt 		撤销工作区某文件修改
+8、git reset HEAD file.txt 		撤销最近一次缓存区提交操作，使缓存区内容回到工作区
+9、git rm file.txt + git commit -m "" 	移除并提交移除操作
+10、git checkout --file.txt 	加载或恢复文件最新版本
+
+远程仓库
+1、$ ssh-keygen -t rsa -C "youremail@example.com"	创建ssh key，将其生成的id_rsa.pub文件内容作为公钥填入githubaccount setting，用于设置github的上传权限，设置了ssh key的主机可以对远程库进行操作，可添加多台主机的公钥，从而可以多地多主机操作
+2、在github上添加repository仓库，可将其clone到本地，也可将本地仓库与其关联
+3、git remote add origin git@server-name:path/repo-name.git 	关联一个远程库
+4、git push -u origin master 	首次推送本地到远程
+5、git push origin master 	推送本地到远程
+
+分支
+1、git checkout -b dev	创建并切换至dev分支
+2、git branch	查看所有分支，带*的为当前分支
+3、git branch dev	创建dev分支
+4、git checkout dev 	切换至dev分支
+5、git merge dev 	将分支dev合并到当前分支
+6、git branch -d dev 	删除dev分支
+7、git merge --no-ff -m "merge with no-ff" dev 	合并后删除分支但分支信息还在
