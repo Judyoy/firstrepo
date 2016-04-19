@@ -1,8 +1,0 @@
-my test txt
-change this 
-change at home
-something happened again
-last word ,i should go to wash my body and go to bed
-now i build a branch dev
-i change in master
-dev again
